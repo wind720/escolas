@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Escolas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&display=swap" rel="stylesheet">
+  <style>
+    body{
+      font-family: 'Hedvig Letters Serif', serif;
+      background-color: rgb(255, 248, 240);
+    }
+    h1 {
+      text-align: center;
+      font-size: 48px;
+      color: rgb(132, 192, 206);
+    }
+
+    .tabela-container {
+      margin-top: 80px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 700px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 700px;
+    }
+
+    th, td {
+      border: 1px solid rgb(190, 159, 123);
+      text-align: left;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: rgb(255, 210, 159);
+      color: rgb(76, 172, 194);
+      font-weight: 900;
+    }
+
+    .search-bar {
+      margin-bottom: 20px;
+    }
+    .forms{
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      align-items: center;
+      margin-left: auto;
+      margin-right: auto;
+      gap: 50px;
+      width: 1000px;
+      height: 100px;
+    }
+    label{
+      color: rgb(69, 102, 109);
+      font-weight: 700;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      function filterTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("escolasTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Use querySelectorAll para obter todas as células da segunda coluna
+        var cells = table.querySelectorAll("td:nth-child(2)");
+
+        for (i = 0; i < cells.length; i++) {
+          td = cells[i];
+          txtValue = td.textContent || td.innerText;
+          var row = td.parentNode; // Obtenha a linha que contém a célula
+
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            row.style.display = "";
+          } else {
+            row.style.display = "none";
+          }
+        }
+      }
+
+      document.getElementById("searchInput").addEventListener("input", filterTable);
+      var table = document.getElementById("escolasTable");
+      var rows = table.getElementsByTagName("tr");
+      var rowsToShow = 11; // Defina o número inicial de linhas para exibir
+
+      // Oculta as linhas além do número inicial definido
+      for (var i = rowsToShow; i < rows.length; i++) {
+        rows[i].classList.add("hidden");
+      }
+
+      // Função para exibir mais linhas quando o botão "Ver Mais" é clicado
+      function showMoreRows() {
+        rowsToShow += 8; // Aumenta o número de linhas para exibir
+        for (var i = 0; i < rows.length; i++) {
+          if (i < rowsToShow) {
+            rows[i].classList.remove("hidden");
+          } else {
+            rows[i].classList.add("hidden");
+          }
+        }
+      }
+
+      // Adiciona o botão "Ver Mais" abaixo da tabela
+      var showMoreButton = document.createElement("button");
+      showMoreButton.textContent = "Ver Mais";
+      showMoreButton.addEventListener("click", showMoreRows);
+      table.parentNode.appendChild(showMoreButton);
+    // Adicionando evento ao botão "Ver Detalhes da Escola"
+    document.getElementById("verDetalhesButton").addEventListener("click", function (event) {
+      event.preventDefault();
+      var idEscolaDetalhes = document.getElementById("idEscolaDetalhes").value;
+      window.location.href = `/escola/${idEscolaDetalhes}`;
+    });
+  });
+
+  </script>
+</head>
+<body>
+  <h1 class="titulo">Sistema de Escolas</h1>
+
+<div class="forms">
+
+  <div class="form1">
+  <form action="/media" method="get" class="a1">
+    <label for="idEscola">Analisar Média:</label>
+    <input type="text" id="idEscola" name="id_escola" required>
+    <button type="submit">Calcular Média</button>
+  </form>
+  </div>
+
+  <div>
+    <form method="get" action="/escola">
+      <label for="idEscolaDetalhes">Detalhes da Escola:</label>
+      <input type="text" id="idEscolaDetalhes" name="id_escola" required>
+      <button type="submit" id="verDetalhesButton">Ver Detalhes da Escola</button>
+    </form>
+  </div>
+  
+</div>
+
+  <div class="tabela-container">
+    <div class="search-bar">
+      <label for="searchInput">Pesquisar:</label>
+      <input type="text" id="searchInput" placeholder="Digite para pesquisar">
+    </div>
+
+    <table id="escolasTable">
+      <tr>
+        <th>ID Escola</th>
+        <th>Nome da Escola</th>
+      </tr>
+      <tr>
+        <td>31348490</td>
+        <td>ESCOLA MUNICIPAL JOSE CARLOS PEREIRA</td>
+      </tr>
+      <tr>
+        <td>31037397</td>
+        <td>ESCOLA MUNICIPAL DONA MARIA ROSA</td>
+      </tr>
+      <tr>
+        <td>31223905</td>
+        <td>EM SIDNEY JOSE DE OLIVEIRA</td>
+      </tr>
+      <tr>
+        <td>31037338</td>
+        <td>EM SAO JOSE</td>
+      </tr>
+      <tr>
+        <td>31037290</td>
+        <td>EM SAO GERALDO</td>
+      </tr>
+      <tr>
+        <td>31248665</td>
+        <td>EM RAIO DE SOL</td>
+      </tr>
+      <tr>
+        <td>31037231</td>
+        <td>EM PROFESSORA HERMINIA CORGOZINHO</td>
+      </tr>
+      <tr>
+        <td>31277649</td>
+        <td>EM PROFESSOR PAULO FREIRE</td>
+      </tr>
+      <tr>
+        <td>31220051</td>
+        <td>EM PROFESSOR ODILON SANTIAGO</td>
+      </tr>
+      <tr>
+        <td>31277631</td>
+        <td>EM PROFA VENEZA G OLIVEIRA</td>
+      </tr>
+      <tr>
+        <td>31320374</td>
+        <td>EM PROFA MARIA LOURDES TEIXEIRA</td>
+      </tr>
+      <tr>
+        <td>31320391</td>
+        <td>EM PROFA EVELINA GRECO SANTOS</td>
+      </tr>
+      <tr>
+        <td>31033308</td>
+        <td>EM PROF DARCY RIBEIRO</td>
+      </tr>
+      <tr>
+        <td>31223921</td>
+        <td>EM PROF BAHIA</td>
+      </tr>
+      <tr>
+        <td>31212733</td>
+        <td>EM PE GUARITA</td>
+      </tr>
+      <tr>
+        <td>31037541</td>
+        <td>EM OTAVIO OLIMPIO DE OLIVEIRA</td>
+      </tr>
+      <tr>
+        <td>31037532</td>
+        <td>EM ORIBES BATISTA LEITE</td>
+      </tr>
+      <tr>
+        <td>31223913</td>
+        <td>EM MARIA FONSECA PECANHA</td>
+      </tr>
+      <tr>
+        <td>31322679</td>
+        <td>EM JOSE QUINTINO LOPES</td>
+      </tr>
+      <tr>
+        <td>31223891</td>
+        <td>EM JOAO SEVERINO DE AZEVEDO</td>
+      </tr>
+      <tr>
+        <td>31227102</td>
+        <td>EM JOAO GONTIJO DA FONSECA</td>
+      </tr>
+      <tr>
+        <td>31037214</td>
+        <td>EM JOAO EPIPHANIO PEREIRA</td>
+      </tr>
+      <tr>
+        <td>31037401</td>
+        <td>EM EMILIO RIBAS</td>
+      </tr>
+      <tr>
+        <td>31220060</td>
+        <td>EM DR SEBASTIAO GOMES GUIMARAES</td>
+      </tr>
+      <tr>
+        <td>31370347</td>
+        <td>EM DIONISIO JOAQUIM RODRIGUES</td>
+      </tr>
+      <tr>
+        <td>31037346</td>
+        <td>EM BOM PASTOR</td>
+      </tr>
+      <tr>
+        <td>31037320</td>
+        <td>EM BENJAMIN CONSTANT</td>
+      </tr>
+      <tr>
+        <td>31037303</td>
+        <td>EM ANTONIO PIO DA SILVA</td>
+      </tr>
+      <tr>
+        <td>31313653</td>
+        <td>EM ANTONIETA FONSECA</td>
+      </tr>
+      <tr>
+        <td>31227099</td>
+        <td>EM ADOLFO MACHADO</td>
+      </tr>
+      <tr>
+        <td>31033383</td>
+        <td>EE VICENTE MATEUS</td>
+      </tr>
+      <tr>
+        <td>31033324</td>
+        <td>EE SAO VICENTE</td>
+      </tr>
+      <tr>
+        <td>31033332</td>
+        <td>EE SAO FRANCISCO DE PAULA</td>
+      </tr>
+      <tr>
+        <td>31033316</td>
+        <td>EE SAO FRANCISCO DE ASSIS</td>
+      </tr>
+      <tr>
+        <td>31033031</td>
+        <td>EE SANTO TOMAZ DE AQUINO</td>
+      </tr>
+      <tr>
+        <td>31033057</td>
+        <td>EE ROSA VAZ DE ARAUJO</td>
+      </tr>
+      <tr>
+        <td>31033341</td>
+        <td>EE PROFESSOR CHICO DIAS</td>
+      </tr>
+      <tr>
+        <td>31033294</td>
+        <td>EE PATRONATO BOM PASTOR</td>
+      </tr>
+      <tr>
+        <td>31033286</td>
+        <td>EE PADRE MATIAS LOBATO</td>
+      </tr>
+      <tr>
+        <td>31033278</td>
+        <td>EE NOSSA SENHORA DO SAGRADO CORACAO</td>
+      </tr>
+      <tr>
+        <td>31033260</td>
+        <td>EE MONSENHOR DOMINGOS</td>
+      </tr>
+      <tr>
+        <td>31033251</td>
+        <td>EE MIGUEL COUTO</td>
+      </tr>
+      <tr>
+        <td>31032999</td>
+        <td>EE MARTIN CYPRIEN</td>
+      </tr>
+      <tr>
+        <td>31033375</td>
+        <td>EE MANOEL CORREA FILHO</td>
+      </tr>
+      <tr>
+        <td>31033235</td>
+        <td>EE LUIZ DE MELO VIANA SOBRINHO</td>
+      </tr>
+      <tr>
+        <td>31033227</td>
+        <td>EE LAURO EPIFANIO</td>
+      </tr>
+      <tr>
+        <td>31033219</td>
+        <td>EE JOVELINO RABELO</td>
+      </tr>
+      <tr>
+        <td>31033201</td>
+        <td>EE JOAQUIM NABUCO</td>
+      </tr>
+      <tr>
+        <td>31033405</td>
+        <td>EE ILIDIO DA COSTA PEREIRA</td>
+      </tr>
+      <tr>
+        <td>31033197</td>
+        <td>EE HENRIQUE GALVAO</td>
+      </tr>
+      <tr>
+        <td>31033189</td>
+        <td>EE HALIM SOUKI</td>
+      </tr>
+      <tr>
+        <td>31033171</td>
+        <td>EE ENGENHEIRO PEDRO MAGALHAES</td>
+      </tr>
+      <tr>
+        <td>31033154</td>
+        <td>EE DONA ANTONIA VALADARES</td>
+      </tr>
+      <tr>
+        <td>31033391</td>
+        <td>EE DO BAIRRO BELO VALE</td>
+      </tr>
+      <tr>
+        <td>31033014</td>
+        <td>EE ARMANDO NOGUEIRA SOARES</td>
+      </tr>
+      <tr>
+        <td>31033022</td>
+        <td>EE ANTONIO OLIMPIO DE MORAIS</td>
+      </tr>
+      <tr>
+        <td>31033006</td>
+        <td>EE ANTONIO GONCALVES DE MATOS</td>
+      </tr>
+      <tr>
+        <td>31033359</td>
+        <td>EE ANTONIO DA COSTA PEREIRA</td>
+      </tr>
+      <tr>
+        <td>31033421</td>
+        <td>EE ANTONIO BELARMINO GOMES</td>
+      </tr>
+      <tr>
+        <td>31326992</td>
+        <td>EE ALBERTO SANTOS DUMONT</td>
+      </tr>
+      <tr>
+        <td>31364592</td>
+        <td>COLEGIO TIRADENTES PMMG - UNIDADE DIVINOPOLIS</td>
+      </tr>
+      <tr>
+        <td>31037222</td>
+        <td>CENTRO TECNICO PEDAGOGICO - CETEPE</td>
+      </tr>
+      <tr>
+        <td>31268631</td>
+        <td>CEFET-MG - UNED DIVINOPOLIS</td>
+      </tr>
+      <tr>
+        <td>31223930</td>
+        <td>CAIC EM PE JOAO BRUNO</td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes da Escola</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Hedvig Letters Serif', serif;
+      background-color: rgb(255, 248, 240);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 48px;
+      color: rgb(132, 192, 206);
+    }
+
+    .container-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .container {
+      width: 48%;
+      box-sizing: border-box;
+      border: 1px solid rgb(190, 159, 123);
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+    <h1>Detalhes da Escola</h1>
+    <% if (escolas && escolas.length > 0) { %>
+      <div class="container-group">
+        <% escolas.forEach(escola => { %>
+          <div class="container">
+            <ul>
+          <li><strong>Ano:</strong> <%= escola.ano %></li>
+          <li><strong>UF:</strong> <%= escola.sigla_uf %></li>
+          <li><strong>Município:</strong> <%= escola.id_municipio %></li>
+          <li><strong>ID Escola:</strong> <%= escola.id_escola %></li>
+          <li><strong>Rede:</strong> <%= escola.rede %></li>
+          <li><strong>Ensino:</strong> <%= escola.ensino %></li>
+          <li><strong>Anos Escolares:</strong> <%= escola.anos_escolares %></li>
+          <li><strong>Taxa de Aprovação:</strong> <%= escola.taxa_aprovacao %></li>
+          <li><strong>Indicador de Rendimento:</strong> <%= escola.indicador_rendimento %></li>
+          <li><strong>Nota Saeb Matemática:</strong> <%= escola.nota_saeb_matematica %></li>
+          <li><strong>Nota Saeb Língua Portuguesa:</strong> <%= escola.nota_saeb_lingua_portuguesa %></li>
+          <li><strong>Nota Saeb Média Padronizada:</strong> <%= escola.nota_saeb_media_padronizada %></li>
+          <li><strong>Índice de Desenvolvimento da Educação Básica (IDEB):</strong> <%= escola.ideb %></li>
+          <li><strong>Projeção:</strong> <%= escola.projecao %></li>
+        </ul>
+    </div>
+  <% }); %>
+</div>
+<% } else { %>
+<p>Nenhum registro encontrado para a escola com ID <%= id_escola %>.</p>
+<% } %>
+<p><a href="/">Voltar à Página Inicial</a></p>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Médias</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&display=swap" rel="stylesheet">
+  <style>
+    body{
+      font-family: 'Hedvig Letters Serif', serif;
+      background-color: rgb(255, 248, 240);
+    }
+    h1 {
+      font-size: 48px;
+      color: rgb(132, 192, 206);
+    }
+    .enf{
+      font-size: 20px;
+      font-weight: 600;
+      color: rgb(189, 139, 82);
+    }
+  </style>
+</head>
+<body>
+  <h1>Resultados para a Escola <%= id_escola %></h1>
+  <p class="enf">Média das Colunas:</p>
+  <ul>
+    <li><strong>Taxa de Aprovação:</strong> <%= media[0] %></li>
+    <li><strong>Indicador de Rendimento:</strong> <%= media[1] %></li>
+    <li><strong>Nota Saeb Matemática:</strong> <%= media[2] %></li>
+    <li><strong>Nota Saeb Língua Portuguesa:</strong> <%= media[3] %></li>
+    <li><strong>Nota Saeb Média Padronizada:</strong> <%= media[4] %></li>
+    <li><strong>Índice de Desenvolvimento da Educação Básica (IDEB):</strong> <%= media[5] %></li>
+    <li><strong>Projeção:</strong> <%= media[6] %></li>
+  </ul>
+  <p><a href="/">Voltar à Página Inicial</a></p>
+</body>
+</html>
